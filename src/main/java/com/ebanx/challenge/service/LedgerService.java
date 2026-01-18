@@ -23,43 +23,47 @@ public class LedgerService {
   }
 
   public Object handleEvent(Event event) {
-    return switch (event.type()) {
-      case DEPOSIT -> {
-        double balance =
-            ledger.deposit(event.destination(), event.amount());
+    try {
+      return switch (event.type()) {
+        case DEPOSIT -> {
+          double balance =
+              ledger.deposit(event.destination(), event.amount());
 
-        yield new Object[] { "destination", event.destination(), balance };
-      }
-
-      case WITHDRAW -> {
-        if (!ledger.exists(event.origin())) {
-          yield null;
+          yield new Object[] { "destination", event.destination(), balance };
         }
 
-        double balance =
-            ledger.withdraw(event.origin(), event.amount());
+        case WITHDRAW -> {
+          if (!ledger.exists(event.origin())) {
+            yield null;
+          }
 
-        yield new Object[] { "origin", event.origin(), balance };
-      }
+          double balance =
+              ledger.withdraw(event.origin(), event.amount());
 
-      case TRANSFER -> {
-        if (!ledger.exists(event.origin())) {
-          yield null;
+          yield new Object[] { "origin", event.origin(), balance };
         }
 
-        double originBalance =
-            ledger.withdraw(event.origin(), event.amount());
-        double destinationBalance =
-            ledger.deposit(event.destination(), event.amount());
+        case TRANSFER -> {
+          if (!ledger.exists(event.origin())) {
+            yield null;
+          }
 
-        yield new Object[] {
-          "transfer",
-          event.origin(),
-          originBalance,
-          event.destination(),
-          destinationBalance
-        };
-      }
-    };
+          double originBalance =
+              ledger.withdraw(event.origin(), event.amount());
+          double destinationBalance =
+              ledger.deposit(event.destination(), event.amount());
+
+          yield new Object[] {
+            "transfer",
+            event.origin(),
+            originBalance,
+            event.destination(),
+            destinationBalance
+          };
+        }
+      };
+    } catch (IllegalStateException e) {
+      return null;
+    }
   }
 }

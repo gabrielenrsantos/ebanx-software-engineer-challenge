@@ -27,9 +27,19 @@ public class Ledger {
   }
 
   public double withdraw(String accountId, double amount) {
-    double balance = accounts.get(accountId) - amount;
-    accounts.put(accountId, balance);
+    Double currentBalance = accounts.get(accountId);
 
-    return balance;
+    if (currentBalance == null) {
+      throw new IllegalStateException("Account not found");
+    }
+
+    if (currentBalance < amount) {
+      throw new IllegalStateException("Insufficient balance");
+    }
+
+    double newBalance = currentBalance - amount;
+    accounts.put(accountId, newBalance);
+
+    return newBalance;
   }
 }
