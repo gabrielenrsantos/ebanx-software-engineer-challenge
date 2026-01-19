@@ -1,0 +1,153 @@
+type: collection.insomnia.rest/5.0
+schema_version: "5.1"
+name: EBANX Software Engineer Take-Home Challenge
+meta:
+  id: wrk_f12be8ed400948d28ba5ec2f34e35352
+  created: 1768863023485
+  modified: 1768863023485
+  description: ""
+collection:
+  - url: "{{ _.base_url }}/reset"
+    name: Reset
+    meta:
+      id: req_71a5017f089a4107b754918928ea1f6c
+      created: 1768863028617
+      modified: 1768863256194
+      isPrivate: false
+      description: ""
+      sortKey: -1768863028617
+    method: POST
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: "{{ _.base_url }}/balance"
+    name: Balance
+    meta:
+      id: req_57028fca525d4418bd390eedd88375f7
+      created: 1768863230053
+      modified: 1768863672186
+      isPrivate: false
+      description: ""
+      sortKey: -1768863230053
+    method: GET
+    parameters:
+      - name: account_id
+        value: "100"
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: "{{ _.base_url }}/event"
+    name: Deposit
+    meta:
+      id: req_9fb372e1fb754a3d93a521d74d2009b0
+      created: 1768863309010
+      modified: 1768863424955
+      isPrivate: false
+      description: ""
+      sortKey: -1768863309010
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"type": "DEPOSIT",
+        	"destination": "100",
+        	"amount": 10.0
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: "{{ _.base_url }}/event"
+    name: Withdraw
+    meta:
+      id: req_3522e8c3d20047eda4051050b7ea75d1
+      created: 1768863461696
+      modified: 1768863539996
+      isPrivate: false
+      description: ""
+      sortKey: -1768863461696
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"type": "WITHDRAW",
+        	"origin": "100",
+        	"amount": 5.0
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: "{{ _.base_url }}/event"
+    name: Transfer
+    meta:
+      id: req_2acc20316b624c27854412a5922cf91e
+      created: 1768863569860
+      modified: 1768863648626
+      isPrivate: false
+      description: ""
+      sortKey: -1768863569860
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"type": "TRANSFER",
+        	"origin": "100",
+        	"destination": "300",
+        	"amount": 2.5
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_e1ae51ba09071a5bc0b9f0494daf614cd3812028
+    created: 1768863023514
+    modified: 1768863023514
+environments:
+  name: Base Environment
+  meta:
+    id: env_e1ae51ba09071a5bc0b9f0494daf614cd3812028
+    created: 1768863023511
+    modified: 1768863164245
+    isPrivate: false
+  data:
+    base_url: http://127.0.0.1:8080
