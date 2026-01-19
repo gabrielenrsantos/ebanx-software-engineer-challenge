@@ -3,6 +3,7 @@ package com.ebanx.challenge.service;
 import org.springframework.stereotype.Service;
 
 import com.ebanx.challenge.domain.Event;
+import com.ebanx.challenge.domain.EventResult;
 import com.ebanx.challenge.domain.Ledger;
 
 @Service
@@ -22,14 +23,14 @@ public class LedgerService {
     return ledger.getBalance(accountId);
   }
 
-  public Object handleEvent(Event event) {
+  public EventResult handleEvent(Event event) {
     try {
       return switch (event.type()) {
         case DEPOSIT -> {
           double balance =
               ledger.deposit(event.destination(), event.amount());
 
-          yield new Object[] { "destination", event.destination(), balance };
+          yield new EventResult(event.destination(), balance);
         }
 
         case WITHDRAW -> {
@@ -40,7 +41,7 @@ public class LedgerService {
           double balance =
               ledger.withdraw(event.origin(), event.amount());
 
-          yield new Object[] { "origin", event.origin(), balance };
+          yield new EventResult(balance, event.origin());
         }
 
         case TRANSFER -> {
@@ -53,13 +54,12 @@ public class LedgerService {
           double destinationBalance =
               ledger.deposit(event.destination(), event.amount());
 
-          yield new Object[] {
-            "transfer",
-            event.origin(),
-            originBalance,
-            event.destination(),
-            destinationBalance
-          };
+          yield new EventResult(
+              event.origin(),
+              originBalance,
+              event.destination(),
+              destinationBalance
+          );
         }
       };
     } catch (IllegalStateException e) {
