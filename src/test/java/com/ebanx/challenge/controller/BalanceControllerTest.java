@@ -8,6 +8,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.util.Map;
 import java.util.Objects;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -26,6 +27,12 @@ public class BalanceControllerTest {
 
   @Autowired
   private ObjectMapper objectMapper;
+
+  @BeforeEach
+  void reset() throws Exception {
+    mockMvc.perform(post("/reset"))
+      .andExpect(status().isOk());
+  }
 
   @Test
   void shouldReturnZeroForNonExistingAccount() throws Exception {
