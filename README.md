@@ -256,3 +256,19 @@ For this challenge, the focus was kept on API correctness and test coverage.
 - Controllers are responsible for HTTP concerns only
 - Service layer does not depend on HTTP abstractions
 - State is kept in-memory, as specified by the challenge
+
+## API Client (Insomnia)
+
+An Insomnia collection is included to facilitate manual testing of all API endpoints.
+
+File:
+
+```
+insomnia.yaml
+```
+
+To use it:
+
+1. Open Insomnia
+2. Import → File
+3. Select the YAML file
