@@ -51,10 +51,10 @@ Resets all accounts and balances.
 POST /reset
 ```
 
-### Response
+#### Status code
 
 ```
-200 OK
+200
 ```
 
 ### Get balance
@@ -67,16 +67,30 @@ GET /balance?account_id={id}
 
 ### Non-existing account
 
+#### Status code
+
 ```
 404
+```
+
+#### Response
+
+```
 0
 ```
 
 ### Existing account
 
+#### Status code
+
 ```
 200
-<balance>
+```
+
+#### Response
+
+```
+5.0
 ```
 
 ### Create account / Deposit
@@ -87,7 +101,7 @@ Creates an account if it does not exist, or deposits into an existing one.
 POST /event
 ```
 
-### Request
+#### Request
 
 ```
 {
@@ -97,10 +111,15 @@ POST /event
 }
 ```
 
-### Response
+#### Status code
 
 ```
 201
+```
+
+#### Response
+
+```
 {
   "destination": {
     "id": "100",
@@ -117,7 +136,7 @@ Withdraws amount from an existing account.
 POST /event
 ```
 
-### Request
+#### Request
 
 ```
 {
@@ -127,10 +146,15 @@ POST /event
 }
 ```
 
-### Response
+#### Status code
 
 ```
 201
+```
+
+#### Response
+
+```
 {
   "origin": {
     "id": "100",
@@ -141,8 +165,15 @@ POST /event
 
 ### Non-existing account
 
+#### Status code
+
 ```
 404
+```
+
+#### Response
+
+```
 0
 ```
 
@@ -165,10 +196,15 @@ POST /event
 }
 ```
 
-### Response
+#### Status code
 
 ```
 201
+```
+
+### Response
+
+```
 {
   "origin": {
     "id": "100",
@@ -183,8 +219,15 @@ POST /event
 
 ### Non-existing origin account
 
+#### Status code
+
 ```
 404
+```
+
+#### Response
+
+```
 0
 ```
 
